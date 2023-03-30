@@ -1,0 +1,33 @@
+---
+- hosts: webservers
+  tasks:
+  - name: update apt repo
+    command:
+      cmd: apt update
+  - name: install nginx package
+    apt:
+      name: nginx
+      state: latest
+  - name: create tutorial dir
+    file:
+      path: /var/www/tutorial
+      state: directory
+  - name: copy index.html 
+    copy:
+      src: index.html
+      dest: /var/www/tutorial/index.html
+    notify: restart the service
+  - name: copy virtualhost 
+    copy:
+      src: tutorial
+      dest: /etc/nginx/sites-enabled/tutorial
+    notify: restart the service
+  - name: start the service
+    service:
+      name: nginx
+      state: started
+  handlers:
+  - name: restart the service
+    service:
+      name: nginx
+      state: restarted  
