@@ -1,0 +1,15 @@
+#ansible -i hosts webserver -m apt -a "name=tree state=latest"
+---
+- hosts: webserver
+  tasks:
+  - name: ping the hosts
+    ping:
+  - name: get the system profile
+    setup:
+  - name: updatd apt repo
+    command: 
+      cmd: apt update
+  - name: install tree package
+    apt: 
+      name: tree
+      state: latest
