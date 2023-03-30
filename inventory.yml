@@ -1,0 +1,10 @@
+all:
+  hosts:
+    localhost
+  children:
+    webservers:
+      hosts: 
+        172.31.8.84
+    dbservers:
+      hosts:
+        dummy.example.com
