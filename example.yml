@@ -1,6 +1,6 @@
 #ansible -i hosts webserver -m apt -a "name=tree state=latest"
 ---
-- hosts: webserver
+- hosts: webservers
   tasks:
   - name: ping the hosts
     ping:
