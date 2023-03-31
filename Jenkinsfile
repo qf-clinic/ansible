@@ -1,10 +1,5 @@
 pipeline {
     agent { label 'ansible-label' }
-
-    // tools {
-    //     maven "M3"
-    // }
-
     stages {
         stage('clone') {
             steps { 
