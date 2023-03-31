@@ -1,0 +1,25 @@
+- name: update apt repo
+  command:
+    cmd: apt update
+- name: install nginx package
+  apt:
+    name: "{{ packagename }}"
+    state: latest
+- name: create tutorial dir
+  file:
+    path: /var/www/tutorial
+    state: directory
+- name: copy index.html 
+  copy:
+    src: index.html
+    dest: /var/www/tutorial/index.html
+  notify: restart the service
+- name: copy virtualhost 
+  template:
+    src: tutorial.j2
+    dest: /etc/nginx/sites-enabled/tutorial
+  notify: restart the service
+- name: start the service
+  service:
+    name: "{{ packagename }}"
+    state: started
