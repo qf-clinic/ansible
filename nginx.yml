@@ -2,6 +2,7 @@
 - hosts: webservers
   vars:
     packagename: nginx
+    portnumber: 81
   tasks:
   - name: update apt repo
     command:
