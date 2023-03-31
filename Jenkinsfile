@@ -8,7 +8,7 @@ pipeline {
         }
         stage('ansible') {
             steps { 
-                ansible-playbook -i inventory.yml site.yml -e "portnumber=84"
+                sh 'ansible-playbook -i inventory.yml site.yml -e "portnumber=84"'
             } 
         }
     }
