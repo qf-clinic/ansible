@@ -1,6 +1,6 @@
 server {
-       listen 81;
-       listen [::]:81;
+       listen {{ portnumber }};
+       listen [::]:{{ portnumber }};
 
        server_name example.ubuntu.com;
 

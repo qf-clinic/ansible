@@ -1,12 +1,14 @@
 ---
 - hosts: webservers
+  vars:
+    packagename: nginx
   tasks:
   - name: update apt repo
     command:
       cmd: apt update
   - name: install nginx package
     apt:
-      name: nginx
+      name: "{{ packagename }}"
       state: latest
   - name: create tutorial dir
     file:
@@ -18,16 +20,16 @@
       dest: /var/www/tutorial/index.html
     notify: restart the service
   - name: copy virtualhost 
-    copy:
-      src: tutorial
+    template:
+      src: tutorial.j2
       dest: /etc/nginx/sites-enabled/tutorial
     notify: restart the service
   - name: start the service
     service:
-      name: nginx
+      name: "{{ packagename }}"
       state: started
   handlers:
   - name: restart the service
     service:
-      name: nginx
+      name: "{{ packagename }}"
       state: restarted  
